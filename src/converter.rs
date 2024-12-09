@@ -242,6 +242,11 @@ pub fn convert_to_vowel_in_stem(hiragana: char, to_vowel: Vowel) -> char {
 
 /// Converts the given katakana `char` to hiragana.
 pub fn convert_katakana_to_hiragana(katakana: char) -> char {
+    // there's no hiragana equivalent for ヿ(koto) the corresponding hiragana unicode character is ゟ(yori)
+    if katakana == 'ヿ' {
+        return katakana;
+    }
+
     if !charset::is_katakana(katakana) {
         return katakana;
     }
@@ -250,6 +255,11 @@ pub fn convert_katakana_to_hiragana(katakana: char) -> char {
 
 /// Converts the given hiragana `char` to katakana.
 pub fn convert_hiragana_to_katakana(hiragana: char) -> char {
+    // there's no katakana equivalent for ゟ(yori) the corresponding katakana unicode character is ヿ(koto)
+    if hiragana == 'ゟ' {
+        return hiragana;
+    }
+
     if !charset::is_hiragana(hiragana) {
         return hiragana;
     }
